@@ -1,0 +1,13 @@
+public class UniqueDigitsNumbers {
+    public static void main(String[] args) {
+        for (int i = 100; i <= 999; i++) {
+            int hundredsDigit = i / 100;
+            int tensDigit = (i / 10) % 10;
+            int onesDigit = i % 10;
+
+            if (hundredsDigit != tensDigit && tensDigit != onesDigit && onesDigit != hundredsDigit) {
+                System.out.println(i);
+            }
+        }
+    }
+}
