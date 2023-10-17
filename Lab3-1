@@ -1,0 +1,132 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Student {
+    private int id;
+    private String lastName;
+    private String firstName;
+    private String middleName;
+    private String birthDate;
+    private String address;
+    private String phoneNumber;
+    private String faculty;
+    private int course;
+    private String group;
+
+    public Student(int id, String lastName, String firstName, String middleName, String birthDate,
+                   String address, String phoneNumber, String faculty, int course, String group) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.faculty = faculty;
+        this.course = course;
+        this.group = group;
+    }
+
+ 
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+    public String getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", course=" + course +
+                ", group='" + group + '\'' +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        
+        List<Student> students = new ArrayList<>();
+
+        
+        students.add(new Student(1, "Ivanov", "Petro", "Olegovich", "1998.05.15",
+                "Kyiv, Main St, 123", "1234567890", "Faculty1", 1, "Group1"));
+        students.add(new Student(2, "Petrov", "Mykola", "Ivanovich", "1997.03.20",
+                "Lviv, Central St, 456", "9876543210", "Faculty2", 2, "Group2"));
+        students.add(new Student(3, "Sidorov", "Oleg", "Andriyovich", "1999.09.10",
+                "Odesa, Coastal St, 789", "5555555555", "Faculty1", 1, "Group1"));
+        students.add(new Student(4, "Kovalenko", "Anna", "Mikhailivna", "1996.12.05",
+                "Dnipro, Eastern St, 321", "9998887770", "Faculty3", 3, "Group3"));
+
+        
+        String desiredFaculty = "Faculty1";
+        System.out.println("Spisok students fakultetu " + desiredFaculty + ":");
+        for (Student student : students) {
+            if (student.getFaculty().equals(desiredFaculty)) {
+                System.out.println(student);
+            }
+        }
+
+        
+        System.out.println("Spisky studentiv dlya koghnogo fakultetu i kursu:");
+        for (Student student : students) {
+            System.out.println(student.getFaculty() + ", Course " + student.getCourse() + ":");
+            for (Student otherStudent : students) {
+                if (otherStudent.getFaculty().equals(student.getFaculty()) && otherStudent.getCourse() == student.getCourse()) {
+                    System.out.println(otherStudent);
+                }
+            }
+            System.out.println();
+        }
+
+        
+        int desiredYear = 1998;
+        System.out.println("Spiski studentiv yaki narodilysya pislya " + desiredYear + " roku:");
+        for (Student student : students) {
+            int birthYear = Integer.parseInt(student.getBirthDate().split("\\.")[2]);
+
+            if (birthYear > desiredYear) {
+                System.out.println(student);
+            }
+        }
+
+        
+        String desiredGroup = "Group1";
+        System.out.println("Spisok studentiv grupy " + desiredGroup + ":");
+        for (Student student : students) {
+            if (student.getGroup().equals(desiredGroup)) {
+                System.out.println(student);
+            }
+        }
+    }
+}
