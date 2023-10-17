@@ -1,0 +1,89 @@
+import java.util.Arrays;
+
+public class Vector {
+    private double[] components; // Vector components
+
+    public Vector(double[] components) {
+        this.components = Arrays.copyOf(components, components.length);
+    }
+
+    public double getMagnitude() {
+        double sumOfSquares = 0;
+        for (double component : components) {
+            sumOfSquares += component * component;
+        }
+        return Math.sqrt(sumOfSquares);
+    }
+
+    public double getScalarProduct(Vector other) {
+        double product = 0;
+        for (int i = 0; i < components.length; i++) {
+            product += this.components[i] * other.components[i];
+        }
+        return product;
+    }
+
+    public Vector add(Vector other) {
+        double[] resultComponents = new double[components.length];
+        for (int i = 0; i < components.length; i++) {
+            resultComponents[i] = this.components[i] + other.components[i];
+        }
+        return new Vector(resultComponents);
+    }
+
+    public Vector subtract(Vector other) {
+        double[] resultComponents = new double[components.length];
+        for (int i = 0; i < components.length; i++) {
+            resultComponents[i] = this.components[i] - other.components[i];
+        }
+        return new Vector(resultComponents);
+    }
+
+    public Vector multiplyByConstant(double constant) {
+        double[] resultComponents = new double[components.length];
+        for (int i = 0; i < components.length; i++) {
+            resultComponents[i] = this.components[i] * constant;
+        }
+        return new Vector(resultComponents);
+    }
+
+    public static boolean areCollinear(Vector vector1, Vector vector2) {
+        double scalarProduct = vector1.getScalarProduct(vector2);
+        return scalarProduct == (vector1.getMagnitude() * vector2.getMagnitude());
+    }
+
+    public static boolean areOrthogonal(Vector vector1, Vector vector2) {
+        double scalarProduct = vector1.getScalarProduct(vector2);
+        return scalarProduct == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector{" +
+                "components=" + Arrays.toString(components) +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        Vector vector1 = new Vector(new double[]{1, 2, 3});
+        Vector vector2 = new Vector(new double[]{4, 5, 6});
+
+        System.out.println("Vector 1: " + vector1);
+        System.out.println("Vector 2: " + vector2);
+
+        System.out.println("Magnitude of Vector 1: " + vector1.getMagnitude());
+        System.out.println("Scalar Product: " + vector1.getScalarProduct(vector2));
+
+        Vector sum = vector1.add(vector2);
+        System.out.println("Sum: " + sum);
+
+        Vector difference = vector1.subtract(vector2);
+        System.out.println("Difference: " + difference);
+
+        Vector product = vector1.multiplyByConstant(2);
+        System.out.println("Product: " + product);
+
+        System.out.println("Are vectors collinear? " + areCollinear(vector1, vector2));
+        System.out.println("Are vectors orthogonal? " + areOrthogonal(vector1, vector2));
+    }
+}
