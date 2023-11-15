@@ -1,0 +1,58 @@
+package com.Kovalskyi.console;
+import com.Kovalskyi.flower.Lily;
+import com.Kovalskyi.flower.Orchid;
+import com.Kovalskyi.flower.Rose;
+import com.Kovalskyi.flower.Tulip;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class TextFile {
+    public static void main(String[] args) {
+        Rose redRose = new Rose("роза", "червона", 25, 40.0, 10, "2023.1.1", true);
+        Rose whiteRose = new Rose("роза", "біла", 35, 37.3, 23, "2023.1.2", true);
+        Lily lily = new Lily("лілія", "біла", 20.0, 35.0, 15, "2023.1.3");
+        Orchid orchid = new Orchid("орхідея", "фіолетова", 30.0, 45.0, 8, "2023.1.5");
+        Tulip tulip = new Tulip("тюльпан", "жовтий", 15.0, 30.0, 12, "2023.1.4");
+        // Букет 1
+        FlowerBouquet bouquet1 = new FlowerBouquet("Букет для коханої");
+        bouquet1.addFlower(redRose, 5);
+        bouquet1.addFlower(lily, 10);
+        bouquet1.addFlower(orchid, 3);
+        bouquet1.calculatePrice();
+        // Букет 2
+        FlowerBouquet bouquet2 = new FlowerBouquet("Весільний букет");
+        bouquet2.addFlower(whiteRose, 15);
+        bouquet2.addFlower(tulip, 8);
+        bouquet2.addFlower(orchid, 5);
+        bouquet2.calculatePrice();
+        // Букет 3
+        FlowerBouquet bouquet3 = new FlowerBouquet("Букет на день народження");
+        bouquet3.addFlower(tulip, 10);
+        bouquet3.addFlower(redRose, 7);
+        bouquet3.addFlower(lily, 12);
+        bouquet3.calculatePrice();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введіть діапазон висоти стебла (мінімальна та максимальна через пробіл):");
+        double minHeight = scanner.nextDouble();
+        double maxHeight = scanner.nextDouble();
+        checkAndPrintMatchingBouquets(minHeight, maxHeight, bouquet1, bouquet2, bouquet3);
+    }
+    private static void checkAndPrintMatchingBouquets(double minHeight, double maxHeight, FlowerBouquet... bouquets) {
+        List<FlowerBouquet> matchingBouquets = new ArrayList<>();
+
+        for (FlowerBouquet bouquet : bouquets) {
+            bouquet.checkStemHeightRange(minHeight, maxHeight);
+            if (bouquet.isInStemHeightRange()) {
+                matchingBouquets.add(bouquet);
+            }
+        }
+        if (matchingBouquets.isEmpty()) {
+            System.out.println("Жоден букет не відповідає заданому діапазону висоти стебла.");
+        } else {
+            System.out.println("Букети, які відповідають заданому діапазону висоти стебла:");
+            for (FlowerBouquet matchingBouquet : matchingBouquets) {
+                System.out.println("- " + matchingBouquet.getName());
+            }
+        }
+    }
+}
