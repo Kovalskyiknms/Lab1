@@ -1,0 +1,88 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class TextFile {
+    private String fileName;
+
+    public TextFile(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void createFile() {
+        try {
+            File file = new File(fileName);
+            if (file.createNewFile()) {
+                System.out.println("File " + fileName + " created.");
+            } else {
+                System.out.println("File " + fileName + " already exists.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error creating file: " + e.getMessage());
+        }
+    }
+
+    public void renameFile(String newFileName) {
+        File oldFile = new File(fileName);
+        File newFile = new File(newFileName);
+
+        if (oldFile.renameTo(newFile)) {
+            System.out.println("File renamed to " + newFileName);
+            fileName = newFileName;
+        } else {
+            System.out.println("Error renaming the file.");
+        }
+    }
+
+    public void appendToFile(String textToAppend) {
+        try (FileWriter fileWriter = new FileWriter(fileName, true);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+             PrintWriter out = new PrintWriter(bufferedWriter)) {
+            out.println(textToAppend);
+            System.out.println("Text appended to the file successfully.");
+        } catch (IOException e) {
+            System.err.println("Error appending to the file: " + e.getMessage());
+        }
+    }
+
+    public void deleteFile() {
+        File file = new File(fileName);
+        if (file.delete()) {
+            System.out.println("File " + fileName + " deleted.");
+        } else {
+            System.out.println("Error deleting the file.");
+        }
+    }
+
+    public void printFileContent() {
+        File file = new File(fileName);
+        if (file.exists()) {
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    System.out.println(scanner.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                System.err.println("Error reading the file: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File " + fileName + " does not exist.");
+        }
+    }
+
+    public static void main(String[] args) {
+        TextFile textFile = new TextFile("example.txt");
+
+        textFile.createFile();
+        textFile.appendToFile("This is the text to be appended to the file.");
+        textFile.appendToFile("This is the second line to append.");
+
+        System.out.println("File content:");
+        textFile.printFileContent();
+
+        textFile.renameFile("new_example.txt");
+
+        System.out.println("File content after renaming:");
+        textFile.printFileContent();
+
+        textFile.deleteFile();
+    }
+}
