@@ -1,0 +1,18 @@
+package com.Kovalskyi.flower;
+public class Rose extends Flower {
+    private boolean hasThorns;
+    public Rose(String name, String color, double price, double stemLength, int count, String date, boolean hasThorns) {
+        super(name, color, price, stemLength, count, date);
+        this.hasThorns = hasThorns;
+    }
+    public boolean hasThorns() {
+        return hasThorns;
+    }
+    public void setHasThorns(boolean hasThorns) {
+        this.hasThorns = hasThorns;
+    }
+    @Override
+    public String toString() {
+        return "Назва: " + getName() + " колір: " + getColor() + " ціна: " + getPrice() + " довжина стебла: " + getStemLength() + " кількість: " + getCount() + " дата надходження: " + getDate() + " має шипи: " + hasThorns;
+    }
+}
