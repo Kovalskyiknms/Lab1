@@ -1,0 +1,10 @@
+package com.Kovalskyi.flower;
+public class Tulip extends Flower {
+    public Tulip(String name, String color, double price, double stemLength, int count, String date) {
+        super(name, color, price, stemLength, count, date);
+    }
+    @Override
+    public String toString() {
+        return "Назва: " + getName() + " колір: " + getColor() + " ціна: " + getPrice() + " довжина стебла: " + getStemLength() + " кількість: " + getCount() + " дата надходження: " + getDate();
+    }
+}
