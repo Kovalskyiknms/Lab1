@@ -1,0 +1,64 @@
+package com.Kovalskyi.flower;
+public class Flower {
+    private String name;
+    private String color;
+    private double price;
+    private double stemLength;
+    private int count;
+    private String date;
+    public Flower(String name, String color, double price, double stemLength, int count, String date) {
+        this.name = name;
+        this.color = color;
+        this.price = price;
+        this.stemLength = stemLength;
+        this.count = count;
+        this.date = date;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public double getStemLength() {
+        return stemLength;
+    }
+    public void setStemLength(double stemLength) {
+        this.stemLength = stemLength;
+    }
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        this.count = count;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    @Override
+    public String toString() {
+        return "Flower{" +
+                "name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", stemLength=" + stemLength +
+                ", count=" + count +
+                ", arrivalDate='" + date + '\'' +
+                '}';
+    }
+}
