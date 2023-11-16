@@ -1,0 +1,64 @@
+package com.Kovalskyi.console;
+import java.util.*;
+public class Calendar {
+    private Map<Date, String> holidays;
+
+    public Calendar() {
+        holidays = new HashMap<>();
+    }
+    // Внутрішній клас для представлення подій (вихідні і святкові дні)
+    public class Event {
+        private Date date;
+        private String description;
+        public Event(Date date, String description) {
+            this.date = date;
+            this.description = description;
+        }
+        public Date getDate() {
+            return date;
+        }
+        public String getDescription() {
+            return description;
+        }
+    }
+    // Додавання події до календаря
+    public void addEvent(Date date, String description) {
+        holidays.put(date, description);
+    }
+    // Отримання всіх подій для конкретної дати
+    public List<Event> getEventsForDate(Date date) {
+        List<Event> events = new ArrayList<>();
+        String description = holidays.get(date);
+        if (description != null) {
+            events.add(new Event(date, description));
+        }
+        return events;
+    }
+    // Отримання всіх подій для всього календаря
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        for (Map.Entry<Date, String> entry : holidays.entrySet()) {
+            events.add(new Event(entry.getKey(), entry.getValue()));
+        }
+        return events;
+    }
+    public static void main(String[] args) {
+        Calendar calendar = new Calendar();
+        // Додавання подій
+        calendar.addEvent(new Date(), "Святковий день");
+        calendar.addEvent(new Date(), "Вихідний день");
+        calendar.addEvent(new Date(), "Робочий день");
+        // Отримання всіх подій для конкретної дати
+        List<Event> eventsForToday = calendar.getEventsForDate(new Date());
+        System.out.println("Події на сьогодні:");
+        for (Event event : eventsForToday) {
+            System.out.println(event.getDate() + ": " + event.getDescription());
+        }
+        // Отримання всіх подій для всього календаря
+        List<Event> allEvents = calendar.getAllEvents();
+        System.out.println("\nВсі події:");
+        for (Event event : allEvents) {
+            System.out.println(event.getDate() + ": " + event.getDescription());
+        }
+    }
+}
