@@ -1,0 +1,43 @@
+package com.Kovalskyi.console;
+interface Device {
+    void turnOn();
+    void turnOff();
+}
+// Клас "Принтер", який реалізує інтерфейс "Пристрій"
+class Printer implements Device {
+    @Override
+    public void turnOn() {
+        System.out.println("Принтер увімкнено");
+    }
+    @Override
+    public void turnOff() {
+        System.out.println("Принтер вимкнено");
+    }
+    // Додаткові методи для класу "Принтер"
+    public void print(String document) {
+        System.out.println("Друк документа: " + document);
+    }
+}
+// Клас "Лазерний Принтер", який успадковує від класу "Принтер"
+class LaserPrinter extends Printer {
+    // Додаткові методи для класу "Лазерний Принтер"
+    public void printInColor(String document) {
+        System.out.println("Друк кольорового документа: " + document);
+    }
+}
+// Приклад використання
+public class Calendar {
+    public static void main(String[] args) {
+        // Створення об'єкта "Лазерний Принтер"
+        LaserPrinter laserPrinter = new LaserPrinter();
+        // Використання методів узагальненого інтерфейсу "Пристрій"
+        Device device = laserPrinter;
+        device.turnOn();
+        device.turnOff();
+        // Використання методів класу "Принтер"
+        Printer printer = laserPrinter;
+        printer.print("Текстовий документ");
+        // Використання методів класу "Лазерний Принтер"
+        laserPrinter.printInColor("Кольоровий документ");
+    }
+}
